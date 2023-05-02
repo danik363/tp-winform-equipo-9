@@ -12,6 +12,8 @@ namespace Visual
 {
     public partial class frmPrincipal : Form
     {
+        private List<Articulo> listaArticulo;
+
         public frmPrincipal()
         {
             InitializeComponent();
@@ -20,7 +22,27 @@ namespace Visual
         private void Form1_Load(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
-            dgvArticulos.DataSource = negocio.listar();
+            listaArticulo = negocio.listar();
+            dgvArticulos.DataSource = listaArticulo;
+            cargarImagen(listaArticulo[0].Imagen.Url);
+        }
+
+        private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
+        {
+            Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            cargarImagen(seleccionado.Imagen.Url);
+        }
+
+        private void cargarImagen(string imagen)
+        {
+            try
+            {
+                pboxArticulos.Load(imagen);
+            }
+            catch (Exception)
+            {
+                pboxArticulos.Load("https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png");
+            }
         }
     }
 }

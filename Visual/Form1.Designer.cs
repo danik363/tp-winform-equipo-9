@@ -51,13 +51,15 @@
             this.dgvArticulos.RowHeadersWidth = 62;
             this.dgvArticulos.Size = new System.Drawing.Size(718, 405);
             this.dgvArticulos.TabIndex = 1;
+            this.dgvArticulos.SelectionChanged += new System.EventHandler(this.dgvArticulos_SelectionChanged);
             // 
             // pboxArticulos
             // 
             this.pboxArticulos.Location = new System.Drawing.Point(763, 157);
             this.pboxArticulos.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pboxArticulos.Name = "pboxArticulos";
-            this.pboxArticulos.Size = new System.Drawing.Size(432, 405);
+            this.pboxArticulos.Size = new System.Drawing.Size(400, 400);
+            this.pboxArticulos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pboxArticulos.TabIndex = 2;
             this.pboxArticulos.TabStop = false;
             // 
@@ -127,7 +129,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSlateBlue;
-            this.ClientSize = new System.Drawing.Size(1208, 705);
+            this.ClientSize = new System.Drawing.Size(1208, 600);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pboxArticulos);
