@@ -19,11 +19,12 @@ namespace Visual
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void frmPrincipal_Load(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
             listaArticulo = negocio.listar();
             dgvArticulos.DataSource = listaArticulo;
+           dgvArticulos.Columns["Imagen"].Visible = false;
             cargarImagen(listaArticulo[0].Imagen.Url);
         }
 

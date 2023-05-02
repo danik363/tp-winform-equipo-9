@@ -20,7 +20,7 @@ namespace Visual
 			{
 				conexion.ConnectionString = "server=.\\SQLEXPRESS; database=CATALOGO_P3_DB; integrated security=true";
 				comando.CommandType = System.Data.CommandType.Text;
-				comando.CommandText = "Select A.Codigo as Codigo, A.Nombre as Nombre, A.Descripcion as Descripcion, I.ImagenUrl as ImagenUrl From ARTICULOS A Inner Join IMAGENES I ON A.Id = I.IdArticulo";
+				comando.CommandText = "Select A.Codigo as Codigo, A.Nombre as Nombre, A.Descripcion as Descripcion, I.ImagenUrl as ImagenUrl, M.Descripcion as Marca, C.Descripcion as Categoria, A.Precio as Precio From ARTICULOS A Inner Join IMAGENES I ON A.Id = I.IdArticulo Inner Join MARCAS M ON A.IdMarca = M.Id Inner Join CATEGORIAS C ON A.IdCategoria = C.Id";
 				comando.Connection = conexion;
 
 				conexion.Open();
@@ -35,6 +35,11 @@ namespace Visual
 					aux.Descripcion = (string)lector["Descripcion"];
 					aux.Imagen = new Imagen();
 					aux.Imagen.Url = (string)lector["ImagenUrl"];
+					aux.Marca = new Marca();
+					aux.Marca.Descripcion = (string)lector["Marca"];
+					aux.Categoria = new Categoria();
+					aux.Categoria.Descripcion = (string)lector["Categoria"];
+					aux.Precio = (decimal)lector["Precio"];
 
 					lista.Add(aux);
 				}
