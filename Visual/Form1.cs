@@ -47,5 +47,11 @@ namespace Visual
                 pboxArticulos.Load("https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png");
             }
         }
+
+        private void tsbAgregar_Click(object sender, EventArgs e)
+        {
+            frmAltaArticulo alta = new frmAltaArticulo();
+            alta.ShowDialog();
+        }
     }
 }

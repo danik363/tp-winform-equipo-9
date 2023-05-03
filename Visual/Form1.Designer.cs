@@ -30,16 +30,16 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrincipal));
             this.dgvArticulos = new System.Windows.Forms.DataGridView();
-            this.pboxArticulos = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbAgregar = new System.Windows.Forms.ToolStripButton();
             this.tsbEliminar = new System.Windows.Forms.ToolStripButton();
             this.tsbModificar = new System.Windows.Forms.ToolStripButton();
             this.tsbBuscar = new System.Windows.Forms.ToolStripButton();
+            this.pboxArticulos = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pboxArticulos)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxArticulos)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvArticulos
@@ -51,15 +51,6 @@
             this.dgvArticulos.Size = new System.Drawing.Size(658, 263);
             this.dgvArticulos.TabIndex = 1;
             this.dgvArticulos.SelectionChanged += new System.EventHandler(this.dgvArticulos_SelectionChanged);
-            // 
-            // pboxArticulos
-            // 
-            this.pboxArticulos.Location = new System.Drawing.Point(702, 102);
-            this.pboxArticulos.Name = "pboxArticulos";
-            this.pboxArticulos.Size = new System.Drawing.Size(267, 260);
-            this.pboxArticulos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pboxArticulos.TabIndex = 2;
-            this.pboxArticulos.TabStop = false;
             // 
             // label1
             // 
@@ -94,6 +85,7 @@
             this.tsbAgregar.Name = "tsbAgregar";
             this.tsbAgregar.Size = new System.Drawing.Size(77, 28);
             this.tsbAgregar.Text = "Agregar";
+            this.tsbAgregar.Click += new System.EventHandler(this.tsbAgregar_Click);
             // 
             // tsbEliminar
             // 
@@ -121,6 +113,15 @@
             this.tsbBuscar.Text = "Buscar";
             this.tsbBuscar.ToolTipText = "Modificar\r\n";
             // 
+            // pboxArticulos
+            // 
+            this.pboxArticulos.Location = new System.Drawing.Point(702, 102);
+            this.pboxArticulos.Name = "pboxArticulos";
+            this.pboxArticulos.Size = new System.Drawing.Size(267, 260);
+            this.pboxArticulos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pboxArticulos.TabIndex = 2;
+            this.pboxArticulos.TabStop = false;
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -136,9 +137,9 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.frmPrincipal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pboxArticulos)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxArticulos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

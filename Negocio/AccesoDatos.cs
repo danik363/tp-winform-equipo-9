@@ -16,7 +16,7 @@ namespace Negocio
 
         public AccesoDatos()
         {
-            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CATALOGO_P3_DB; integrated security=true");
+            conexion = new SqlConnection("server=.\\SQLEXPRESS1; database=CATALOGO_P3_DB; integrated security=true");
             cmd = new SqlCommand();
         }
 
@@ -47,6 +47,21 @@ namespace Negocio
                 lector.Close();
             }
             conexion.Close();
+        }
+
+        public void ejecutarAccion()
+        {
+            cmd.Connection = conexion;
+            try
+            {
+                conexion.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         
