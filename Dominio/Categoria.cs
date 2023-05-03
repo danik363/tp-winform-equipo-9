@@ -4,17 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Visual
+namespace Dominio
 {
-    internal class Imagen
+    public class Categoria
     {
         public int Id { get; set; }
-        public int IdArticulo { get; set; }
-        public string Url { get; set; }
+        public string Descripcion { get; set; }
 
         public override string ToString()
         {
-            return Url;
+            return Descripcion;
         }
     }
 }

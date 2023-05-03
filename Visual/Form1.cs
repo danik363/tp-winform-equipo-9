@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Negocio;
+using Dominio;
 
 namespace Visual
 {
@@ -24,14 +26,14 @@ namespace Visual
             ArticuloNegocio negocio = new ArticuloNegocio();
             listaArticulo = negocio.listar();
             dgvArticulos.DataSource = listaArticulo;
-           dgvArticulos.Columns["Imagen"].Visible = false;
-            cargarImagen(listaArticulo[0].Imagen.Url);
+            dgvArticulos.Columns["urlImagen"].Visible = false;
+            cargarImagen(listaArticulo[0].urlImagen);
         }
 
         private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
         {
             Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-            cargarImagen(seleccionado.Imagen.Url);
+            cargarImagen(seleccionado.urlImagen);
         }
 
         private void cargarImagen(string imagen)
