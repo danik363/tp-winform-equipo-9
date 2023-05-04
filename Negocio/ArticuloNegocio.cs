@@ -17,8 +17,15 @@ namespace Negocio
 			AccesoDatos datos = new AccesoDatos();
 			try
 			{
-				datos.setearConsulta("Insert into Articulos (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio)values('" + nuevo.Codigo + "', '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', " + nuevo.Marca + ", " + nuevo.Categoria + ", " + nuevo.Precio + ")");
-				datos.ejecutarAccion();
+				datos.setearConsulta("Insert into ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) values (@codigo, @nombre, @descripcion, @idMarca, @idCategoria, @precio)");
+				datos.setearParametros("@codigo", nuevo.Codigo);
+                datos.setearParametros("@nombre", nuevo.Nombre);
+                datos.setearParametros("@descripcion", nuevo.Descripcion);
+                datos.setearParametros("@idMarca", nuevo.Marca.Id);
+                datos.setearParametros("@idCategoria", nuevo.Categoria.Id);
+                datos.setearParametros("@precio", nuevo.Precio);
+
+                datos.ejecutarAccion();
 			}
 			catch (Exception ex)
 			{
@@ -33,7 +40,7 @@ namespace Negocio
         public List<Articulo> listar()
         {
 			List<Articulo> lista = new List<Articulo>();
-            string consulta = "Select A.Codigo as Codigo, A.Nombre as Nombre, A.Descripcion as Descripcion, I.ImagenUrl as ImagenUrl, M.Descripcion as Marca, C.Descripcion as Categoria, A.Precio as Precio From ARTICULOS A Inner Join IMAGENES I ON A.Id = I.IdArticulo Inner Join MARCAS M ON A.IdMarca = M.Id Inner Join CATEGORIAS C ON A.IdCategoria = C.Id";
+            string consulta = "Select A.Codigo, A.Nombre, A.Descripcion, I.ImagenUrl, M.Descripcion as Marca, C.Descripcion as Categoria, A.Precio From ARTICULOS A Inner Join IMAGENES I ON A.Id = I.IdArticulo Inner Join MARCAS M ON A.IdMarca = M.Id Inner Join CATEGORIAS C ON A.IdCategoria = C.Id";
             AccesoDatos datos = new AccesoDatos();
             try
 			{
@@ -48,8 +55,8 @@ namespace Negocio
 
 					aux.Codigo = (string)datos.Lector["Codigo"];
 					aux.Nombre = (string)datos.Lector["Nombre"];
-					aux.Descripcion = (string)datos.Lector["Descripcion"];
-					aux.urlImagen = (string)datos.Lector["ImagenUrl"];
+					aux.Descripcion = (string)datos.Lector["Descripcion"]; //El modelo que se esta creando no necesita una validacion de null al momento de traer los datos de la db
+					aux.urlImagen = (string)datos.Lector["ImagenUrl"];//Debido a que desde el lado de la app se obliga a colocar todos los datos 
 					aux.Marca = new Marca();
 					aux.Marca.Descripcion = (string)datos.Lector["Marca"];
 					aux.Categoria = new Categoria();
