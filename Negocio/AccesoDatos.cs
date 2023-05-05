@@ -63,6 +63,20 @@ namespace Negocio
                 throw ex;
             }
         }
+        public int ejecutarReturnQuery()
+        {
+            cmd.Connection = conexion;
+            try
+            {
+                conexion.Open();
+                return Convert.ToInt32(cmd.ExecuteScalar()); //Castea el valor retornado el cual es el id del ultimo articulo ingresado en la conexion
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
         public void setearParametros(string nombre, object valor)
         {
                 cmd.Parameters.AddWithValue(nombre, valor);

@@ -29,7 +29,7 @@ namespace Visual
         private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
         {
             Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-            cargarImagen(seleccionado.urlImagen);
+            cargarImagen(seleccionado.Imagen.Url);
         }
 
         private void cargar()
@@ -39,8 +39,8 @@ namespace Visual
             {
                 listaArticulo = negocio.listar();
                 dgvArticulos.DataSource = listaArticulo;
-                dgvArticulos.Columns["urlImagen"].Visible = false;
-                cargarImagen(listaArticulo[0].urlImagen);
+                dgvArticulos.Columns["Imagen"].Visible = false;
+                cargarImagen(listaArticulo[0].Imagen.Url);
             }
             catch (Exception ex)
             {

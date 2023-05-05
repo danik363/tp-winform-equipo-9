@@ -33,6 +33,9 @@ namespace Visual
                 nuevo.Codigo = string.Format(txtCodigo.Text);
                 nuevo.Nombre = string.Format(txtNombre.Text);
                 nuevo.Descripcion = txtDescripcion.Text;
+                nuevo.Imagen = new Imagen();
+                nuevo.Imagen.Url = txtUrlImagen.Text;
+
                 nuevo.Marca = (Marca)cboMarca.SelectedItem;
                 nuevo.Categoria = (Categoria)cboCategoria.SelectedItem;
                 nuevo.Precio = decimal.Parse(txtPrecio.Text);

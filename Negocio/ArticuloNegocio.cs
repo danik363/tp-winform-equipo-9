@@ -15,18 +15,27 @@ namespace Negocio
 		public void agregar(Articulo nuevo)
 		{
 			AccesoDatos datos = new AccesoDatos();
+
 			try
 			{
-				datos.setearConsulta("Insert into ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) values (@codigo, @nombre, @descripcion, @idMarca, @idCategoria, @precio)");
+				datos.setearConsulta("Insert into ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) values (@codigo, @nombre, @descripcion, @idMarca, @idCategoria, @precio); SELECT SCOPE_IDENTITY();");
 				datos.setearParametros("@codigo", nuevo.Codigo);
                 datos.setearParametros("@nombre", nuevo.Nombre);
                 datos.setearParametros("@descripcion", nuevo.Descripcion);
-                datos.setearParametros("@idMarca", nuevo.Marca.Id);
+				datos.setearParametros("@idMarca", nuevo.Marca.Id);
                 datos.setearParametros("@idCategoria", nuevo.Categoria.Id);
                 datos.setearParametros("@precio", nuevo.Precio);
 
-                datos.ejecutarAccion();
-			}
+                nuevo.Imagen.IdArticulo = datos.ejecutarReturnQuery(); //Retorna el id del articulo ingresado a la tabla
+				
+				datos.cerrarConexion();
+
+				datos.setearConsulta("Insert into IMAGENES (IdArticulo, ImagenUrl) values (@articulo, @url)");
+                datos.setearParametros("@articulo", nuevo.Imagen.IdArticulo);
+                datos.setearParametros("@url", nuevo.Imagen.Url);
+
+				datos.ejecutarAccion();
+            }
 			catch (Exception ex)
 			{
 
@@ -56,7 +65,17 @@ namespace Negocio
 					aux.Codigo = (string)datos.Lector["Codigo"];
 					aux.Nombre = (string)datos.Lector["Nombre"];
 					aux.Descripcion = (string)datos.Lector["Descripcion"]; //El modelo que se esta creando no necesita una validacion de null al momento de traer los datos de la db
-					aux.urlImagen = (string)datos.Lector["ImagenUrl"];//Debido a que desde el lado de la app se obliga a colocar todos los datos 
+					aux.Imagen = new Imagen();
+					if(!(datos.Lector["ImagenUrl"] is DBNull)){
+                        aux.Imagen.Url = (string)datos.Lector["ImagenUrl"];//Debido a que desde el lado de la app se obliga a colocar todos los datos 
+					}
+					else
+					{
+						aux.Imagen.Url = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png";
+
+                    }
+					
+					
 					aux.Marca = new Marca();
 					aux.Marca.Descripcion = (string)datos.Lector["Marca"];
 					aux.Categoria = new Categoria();
