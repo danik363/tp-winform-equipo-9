@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAltaArticulo));
             this.label6 = new System.Windows.Forms.Label();
             this.lblCodigo = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
@@ -208,6 +209,8 @@
             // 
             // txtUrlImagen
             // 
+            this.txtUrlImagen.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.txtUrlImagen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtUrlImagen.Location = new System.Drawing.Point(166, 182);
             this.txtUrlImagen.Name = "txtUrlImagen";
             this.txtUrlImagen.Size = new System.Drawing.Size(121, 20);
@@ -258,6 +261,10 @@
             this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.lblCodigo);
             this.Controls.Add(this.label6);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(695, 449);
+            this.MinimumSize = new System.Drawing.Size(695, 449);
             this.Name = "frmAltaArticulo";
             this.Text = "Alta Articulo";
             this.Load += new System.EventHandler(this.frmAltaArticulo_Load);

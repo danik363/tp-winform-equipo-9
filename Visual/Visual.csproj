@@ -106,5 +106,14 @@
       <Name>Negocio</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-eliminar-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-editar-propiedad-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-buscar-en-la-lista-50.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
