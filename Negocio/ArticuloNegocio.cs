@@ -7,11 +7,47 @@ using System.Data.SqlClient;
 using Dominio;
 using System.Security.Cryptography.X509Certificates;
 using Negocio;
+using System.Net;
 
 namespace Negocio
 {
     public class ArticuloNegocio
     {
+		public void modificar(Articulo articulo)
+		{
+			AccesoDatos datos = new AccesoDatos();
+
+			try
+			{
+				datos.setearConsulta("Update ARTICULOS set Codigo = @Codigo, Nombre = @Nombre, Descripcion = @Descripcion, IdMarca = @IdMarca, IdCategoria = @IdCategoria, Precio = @Precio Where Id = @IdArticulo");
+				datos.setearParametros("@IdArticulo", articulo.Id);
+				datos.setearParametros("@Codigo", articulo.Codigo);
+				datos.setearParametros("@Nombre", articulo.Nombre);
+				datos.setearParametros("@Descripcion", articulo.Descripcion);
+				datos.setearParametros("@IdMarca", articulo.Marca.Id);
+				datos.setearParametros("@IdCategoria", articulo.Categoria.Id);
+				datos.setearParametros("@Precio", articulo.Precio);
+
+                articulo.Imagen.IdArticulo = datos.ejecutarReturnQuery(); //Retorna el id del articulo ingresado a la tabla
+
+                datos.cerrarConexion();
+
+                datos.setearConsulta("Update IMAGENES Set ImagenUrl = @Imagen Where IdArticulo = @IdArt");
+                datos.setearParametros("@IdArt", articulo.Id);
+                datos.setearParametros("@Imagen", articulo.Imagen.Url);
+
+				datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+			{
+				throw ex;
+			}
+			finally
+			{
+				datos.cerrarConexion();
+			}
+		}
+
 		public void agregar(Articulo nuevo)
 		{
 			AccesoDatos datos = new AccesoDatos();
@@ -49,12 +85,10 @@ namespace Negocio
         public List<Articulo> listar()
         {
 			List<Articulo> lista = new List<Articulo>();
-            string consulta = "Select A.Codigo, A.Nombre, A.Descripcion, I.ImagenUrl, M.Descripcion as Marca, C.Descripcion as Categoria, A.Precio From ARTICULOS A Inner Join IMAGENES I ON A.Id = I.IdArticulo Inner Join MARCAS M ON A.IdMarca = M.Id Inner Join CATEGORIAS C ON A.IdCategoria = C.Id";
+            string consulta = "Select A.Id, A.Codigo, A.Nombre, A.Descripcion, I.ImagenUrl, M.Descripcion as Marca, C.Descripcion as Categoria, A.Precio, M.Id as IDMarca, C.Id as IDCategoria From ARTICULOS A Inner Join IMAGENES I ON A.Id = I.IdArticulo Inner Join MARCAS M ON A.IdMarca = M.Id Inner Join CATEGORIAS C ON A.IdCategoria = C.Id";
             AccesoDatos datos = new AccesoDatos();
             try
 			{
-				
-
 				datos.setearConsulta(consulta);
 				datos.ejecutarConsulta();
 
@@ -62,6 +96,7 @@ namespace Negocio
 				{
 					Articulo aux = new Articulo();
 
+					aux.Id = (int)datos.Lector["Id"];
 					aux.Codigo = (string)datos.Lector["Codigo"];
 					aux.Nombre = (string)datos.Lector["Nombre"];
 					aux.Descripcion = (string)datos.Lector["Descripcion"]; //El modelo que se esta creando no necesita una validacion de null al momento de traer los datos de la db
@@ -77,8 +112,10 @@ namespace Negocio
 					
 					
 					aux.Marca = new Marca();
+					aux.Marca.Id = (int)datos.Lector["IDMarca"];
 					aux.Marca.Descripcion = (string)datos.Lector["Marca"];
 					aux.Categoria = new Categoria();
+					aux.Categoria.Id = (int)datos.Lector["IDCategoria"];
 					aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
 					aux.Precio = (decimal)datos.Lector["Precio"];
 
