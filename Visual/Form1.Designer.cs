@@ -34,7 +34,7 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbAgregar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbEliminar = new System.Windows.Forms.ToolStripButton();
+            this.btnEliminarFisico = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbModificar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -47,6 +47,8 @@
             // 
             // dgvArticulos
             // 
+            this.dgvArticulos.AllowUserToResizeColumns = false;
+            this.dgvArticulos.AllowUserToResizeRows = false;
             this.dgvArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvArticulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvArticulos.Location = new System.Drawing.Point(17, 102);
@@ -75,7 +77,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbAgregar,
             this.toolStripSeparator1,
-            this.tsbEliminar,
+            this.btnEliminarFisico,
             this.toolStripSeparator2,
             this.tsbModificar,
             this.toolStripSeparator3,
@@ -103,13 +105,14 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
             // 
-            // tsbEliminar
+            // btnEliminarFisico
             // 
-            this.tsbEliminar.Image = global::Visual.Properties.Resources.icons8_eliminar_50;
-            this.tsbEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbEliminar.Name = "tsbEliminar";
-            this.tsbEliminar.Size = new System.Drawing.Size(78, 28);
-            this.tsbEliminar.Text = "Eliminar";
+            this.btnEliminarFisico.Image = global::Visual.Properties.Resources.icons8_eliminar_50;
+            this.btnEliminarFisico.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEliminarFisico.Name = "btnEliminarFisico";
+            this.btnEliminarFisico.Size = new System.Drawing.Size(78, 28);
+            this.btnEliminarFisico.Text = "Eliminar";
+            this.btnEliminarFisico.Click += new System.EventHandler(this.btnEliminarFisico_Click);
             // 
             // toolStripSeparator2
             // 
@@ -185,7 +188,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsbAgregar;
-        private System.Windows.Forms.ToolStripButton tsbEliminar;
+        private System.Windows.Forms.ToolStripButton btnEliminarFisico;
         private System.Windows.Forms.ToolStripButton tsbModificar;
         private System.Windows.Forms.ToolStripButton tsbBuscar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
