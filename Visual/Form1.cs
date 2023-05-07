@@ -28,10 +28,19 @@ namespace Visual
 
         private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
         {
-            Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-            cargarImagen(seleccionado.Imagen.Url);
+            if(dgvArticulos.CurrentRow != null)
+            {
+                Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                cargarImagen(seleccionado.Imagen.Url);
+            }
+            
         }
 
+        private void ocultarColumnas()
+        {
+            dgvArticulos.Columns["Imagen"].Visible = false;
+            dgvArticulos.Columns["Id"].Visible = false;
+        }
         private void cargar()
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
@@ -39,8 +48,7 @@ namespace Visual
             {
                 listaArticulo = negocio.listar();
                 dgvArticulos.DataSource = listaArticulo;
-                dgvArticulos.Columns["Imagen"].Visible = false;
-                dgvArticulos.Columns["Id"].Visible = false;
+                ocultarColumnas();
                 cargarImagen(listaArticulo[0].Imagen.Url);
             }
             catch (Exception ex)
@@ -76,6 +84,29 @@ namespace Visual
             frmAltaArticulo modificar = new frmAltaArticulo(seleccionado);
             modificar.ShowDialog();
             cargar();
+        }
+
+        private void tsbBuscar_Click(object sender, EventArgs e)
+        {
+            frmBuscar frmBuscar = new frmBuscar();
+            try
+            {
+                frmBuscar.ShowDialog();
+                if(frmBuscar.DialogResult == DialogResult.OK)
+                {
+                    dgvArticulos.DataSource = null;
+                    dgvArticulos.DataSource = frmBuscar.ArticulosFiltrados();
+                    ocultarColumnas();
+                    Console.WriteLine(frmBuscar.ArticulosFiltrados());
+                }
+                
+
+            }catch (Exception ex)
+            {
+                MessageBox.Show("Por favor volver a intentar");
+            }
+
+
         }
     }
 }

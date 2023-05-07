@@ -30,13 +30,54 @@ namespace Visual
         {
             Close();
         }
+        private bool soloPrecio(string cadena)
+        {
+            decimal result;
+            if(decimal.TryParse(cadena, out result)) 
+                return true;
+            else return false;
+        }
+        private bool validarAlta()
+        {
+            if (string.IsNullOrEmpty(txtCodigo.Text))
+            {
+                MessageBox.Show("Por favor ingresar un Codigo");
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtNombre.Text))
+            {
+                MessageBox.Show("Por favor ingresar un Nombre");
+                return false;
+            }
+            Console.WriteLine(txtPrecio.Text);
+            if (string.IsNullOrEmpty(txtPrecio.Text))
+            {
 
+                MessageBox.Show("Por favor ingresar Precio");
+                return false;
+
+            }
+            else
+            {
+                if (!soloPrecio(txtPrecio.Text))
+                {
+                    MessageBox.Show("Por favor ingresar Precio valido");
+                    return false;
+
+                }
+            }
+            
+
+            return true;
+        }
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
 
             try
             {
+                if (!(validarAlta()))
+                    return; 
                 if (articulo == null)
                     articulo = new Articulo();
 

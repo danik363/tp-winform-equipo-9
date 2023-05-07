@@ -8,6 +8,8 @@ using Dominio;
 using System.Security.Cryptography.X509Certificates;
 using Negocio;
 using System.Net;
+using System.Collections;
+using System.Security.Policy;
 
 namespace Negocio
 {
@@ -136,5 +138,84 @@ namespace Negocio
 
 		
         }
+
+		public List<Articulo> filtrar(string codigo, string nombre, string descripcion, decimal precio)
+		{
+            List<Articulo> lista = new List<Articulo>();
+            AccesoDatos datos = new AccesoDatos();
+            string consulta = "Select A.Id, A.Codigo, A.Nombre, A.Descripcion, I.ImagenUrl, M.Descripcion as Marca, C.Descripcion as Categoria, A.Precio, M.Id as IDMarca, C.Id as IDCategoria From ARTICULOS A Inner Join IMAGENES I ON A.Id = I.IdArticulo Inner Join MARCAS M ON A.IdMarca = M.Id Inner Join CATEGORIAS C ON A.IdCategoria = C.Id";
+			List<string> queryWhere = new List<string>();
+
+            if (codigo != "")
+			{
+				queryWhere.Add("A.Codigo like '%" + codigo + "%'");
+			}
+			if(nombre != "")
+			{
+				queryWhere.Add("A.Nombre like '%" + nombre + "%'");
+            }
+            if (descripcion != "")
+            {
+				queryWhere.Add("A.Descripcion like '%" + descripcion + "%'");
+            }
+            if (precio != 0)
+			{
+                
+                queryWhere.Add("A.Precio = CAST(REPLACE('"+precio+"', ',', '.') AS money)"); 
+			}
+			if(queryWhere.Count > 0)
+			{
+				consulta += " where ";
+                consulta += string.Join(" And ", queryWhere);
+            }
+			Console.WriteLine(consulta);
+			
+            try
+            {
+                datos.setearConsulta(consulta);
+                datos.ejecutarConsulta();
+
+                while (datos.Lector.Read())
+                {
+                    Articulo aux = new Articulo();
+
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Codigo = (string)datos.Lector["Codigo"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"]; //El modelo que se esta creando no necesita una validacion de null al momento de traer los datos de la db
+                    aux.Imagen = new Imagen();
+                    if (!(datos.Lector["ImagenUrl"] is DBNull))
+                    {
+                        aux.Imagen.Url = (string)datos.Lector["ImagenUrl"];//Debido a que desde el lado de la app se obliga a colocar todos los datos 
+                    }
+                    else
+                    {
+                        aux.Imagen.Url = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png";
+
+                    }
+
+
+                    aux.Marca = new Marca();
+                    aux.Marca.Id = (int)datos.Lector["IDMarca"];
+                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
+                    aux.Categoria = new Categoria();
+                    aux.Categoria.Id = (int)datos.Lector["IDCategoria"];
+                    aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
+
+                    lista.Add(aux);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+		}
     }
 }

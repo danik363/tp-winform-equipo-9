@@ -33,13 +33,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbAgregar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbEliminar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbModificar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbBuscar = new System.Windows.Forms.ToolStripButton();
             this.pboxArticulos = new System.Windows.Forms.PictureBox();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxArticulos)).BeginInit();
@@ -96,6 +96,13 @@
             this.tsbAgregar.Text = "Agregar";
             this.tsbAgregar.Click += new System.EventHandler(this.tsbAgregar_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.BackColor = System.Drawing.Color.SlateBlue;
+            this.toolStripSeparator1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
+            // 
             // tsbEliminar
             // 
             this.tsbEliminar.Image = global::Visual.Properties.Resources.icons8_eliminar_50;
@@ -103,6 +110,12 @@
             this.tsbEliminar.Name = "tsbEliminar";
             this.tsbEliminar.Size = new System.Drawing.Size(78, 28);
             this.tsbEliminar.Text = "Eliminar";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
             // 
             // tsbModificar
             // 
@@ -114,6 +127,12 @@
             this.tsbModificar.Text = "Modificar";
             this.tsbModificar.Click += new System.EventHandler(this.tsbModificar_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
+            // 
             // tsbBuscar
             // 
             this.tsbBuscar.Image = global::Visual.Properties.Resources.icons8_buscar_en_la_lista_50;
@@ -122,6 +141,7 @@
             this.tsbBuscar.Size = new System.Drawing.Size(70, 28);
             this.tsbBuscar.Text = "Buscar";
             this.tsbBuscar.ToolTipText = "Modificar\r\n";
+            this.tsbBuscar.Click += new System.EventHandler(this.tsbBuscar_Click);
             // 
             // pboxArticulos
             // 
@@ -131,25 +151,6 @@
             this.pboxArticulos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pboxArticulos.TabIndex = 2;
             this.pboxArticulos.TabStop = false;
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.BackColor = System.Drawing.Color.SlateBlue;
-            this.toolStripSeparator1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
             // 
             // frmPrincipal
             // 
