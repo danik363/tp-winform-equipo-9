@@ -17,6 +17,7 @@ namespace Visual
         public frmBuscar()
         {
             InitializeComponent();
+            Text = "Buscar Articulo";
         }
         
 

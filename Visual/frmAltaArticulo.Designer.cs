@@ -159,8 +159,8 @@
             // 
             this.textBox7.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold);
-            this.textBox7.Location = new System.Drawing.Point(43, 32);
+            this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox7.Location = new System.Drawing.Point(19, 36);
             this.textBox7.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(268, 31);
@@ -231,7 +231,7 @@
             // 
             this.pboxArticulos.Location = new System.Drawing.Point(374, 101);
             this.pboxArticulos.Name = "pboxArticulos";
-            this.pboxArticulos.Size = new System.Drawing.Size(244, 181);
+            this.pboxArticulos.Size = new System.Drawing.Size(244, 204);
             this.pboxArticulos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pboxArticulos.TabIndex = 25;
             this.pboxArticulos.TabStop = false;
